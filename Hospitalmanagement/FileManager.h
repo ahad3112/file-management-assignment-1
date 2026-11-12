@@ -11,6 +11,7 @@ using namespace std;
 const int DOCTOR_SIZE  = 95;
 const int APPT_SIZE    = 60;
 const int HEADER_SIZE  = sizeof(int);
+const int MAX_DOCTORS  = 100;
 
 struct Doctor {
     char id[15];
@@ -43,5 +44,15 @@ int  getNextAvail(fstream& f, int offset);
 
 int addDoctor(fstream& f, const Doctor& d);
 int addAppointment(fstream& f, const Appointment& a);
+
+// Primary index on Doctor ID (sorted array, binary search)
+void load_doctor_index(fstream& f);
+int  find_doctor_position(const string& id);
+int  find_doctor_offset(const string& id);
+int  add_doctor_indexed(fstream& f, const Doctor& d);
+bool remove_doctor(fstream& f, const string& id);
+bool update_doctor_name(fstream& f, const string& id, const string& name);
+bool update_doctor_address(fstream& f, const string& id, const string& address);
+bool print_doctor_info(fstream& f, const string& id);
 
 #endif
